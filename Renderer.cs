@@ -171,6 +171,9 @@ namespace HomeworkApp
             }
 
             SetColorNormal();
+
+            // Render Help
+            WriteMessageAtSafe(1, Console.WindowHeight - 2, "Use arrow keys and enter to select your answer.");
         }
 
         private void RenderMessage()
