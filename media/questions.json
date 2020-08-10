@@ -1,0 +1,53 @@
+{
+  "questions": [
+    {
+      "title": "What was done to the VHS cassette after finishing a movie?",
+      "options": [
+        "The cassette was blown into.",
+        "The cassette was flipped to reveal the rest of the content.",
+        "The cassette was rewinded to begin at the start."
+      ],
+      "answer": 2
+    },
+
+    {
+      "title": "How many megabytes of data can a typical CD-ROM Hold?",
+      "options": [
+        "300MB",
+        "700MB",
+        "1200MB"
+      ],
+      "answer": 1
+    },
+
+    {
+      "title": "How many megabytes of data can a typical CD-ROM Hold?",
+      "options": [
+        "300MB",
+        "700MB",
+        "1200MB"
+      ],
+      "answer": 1
+    },
+
+    {
+      "title": "Which year was the first moon landing performed?",
+      "options": [
+        "1890",
+        "1994",
+        "1969"
+      ],
+      "answer": 2
+    },
+
+    {
+      "title": "What is the approximate distance from Earth to the Moon",
+      "options": [
+        "380 000km",
+        "48 000km",
+        "2 300 000km"
+      ],
+      "answer": 0
+    }
+  ]
+}
