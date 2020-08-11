@@ -4,22 +4,31 @@
 	HomeAssignment1
 </h1>
 
-### Info
+## Info
 
-This is a .NET C# console application, which asks the user's year of birth.
+This is a .NET C# console application, which asks the user's year of birth and plays some games.
+The application should be fully resizeable and able to render itself properly when necessary.
+
+### Birth year
+Application prompts for year of birth.
 
 <img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/image.png"/>
-<br/>
-	
-And validates the input. If the validation fails:
+
+And validates the input.
+If the validation fails:
 
 <img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/old.png"/>
-<br/>
 
-If the input is accepted the user can proceed to the next part.
+If the input is accepted the user can proceed to the main menu.
 
 <img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/welcome.png"/>
 <br/>
+
+### Main Menu
+
+<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/mainmenu.png"/>
+
+Use the Up and Down arrow keys to select your answer and press Enter to confirm.
 
 ### Questions
 
@@ -28,3 +37,9 @@ Use the Up and Down arrow keys to select your answer and press Enter to confirm.
 
 <img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/megabytes.png"/>
 <br/>
+
+### Slots Game
+
+<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/slots.png"/>
+
+Press Enter to draw new slots.
