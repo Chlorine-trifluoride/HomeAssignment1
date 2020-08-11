@@ -8,8 +8,12 @@ namespace HomeworkApp
 {
     class InputManager
     {
-        public int GetYear(Renderer renderer)
+        private Action invalidYearCallback; // boo more lazy hacks
+
+        public int GetYear(Renderer renderer, Action invalidYearCallback)
         {
+            this.invalidYearCallback = invalidYearCallback;
+
             int result;
             bool success = false;
 
@@ -17,6 +21,12 @@ namespace HomeworkApp
             {
                 renderer.Render();
                 success = TryGetYear(out result);
+
+                if (!success) // hacky, but should work
+                {
+                    invalidYearCallback.Invoke();
+                }
+
             } while (!success);
 
             return result;
@@ -28,6 +38,7 @@ namespace HomeworkApp
 
             void Clear()
             {
+                invalidYearCallback.Invoke();
                 inputString = "";
                 Renderer.Instance.Render();
             }
@@ -64,7 +75,12 @@ namespace HomeworkApp
                 }
             }
 
-            return (int.TryParse(inputString, out result));
+            bool success = int.TryParse(inputString, out result);
+
+            if (result < 0) // avoid problems with negative years
+                success = false;
+
+            return success;
         }
 
         public int GetQuestionAnswer()
@@ -108,6 +124,79 @@ namespace HomeworkApp
         {
             selection += amount;
             int maxLen = QuestionLoader.Instance.CurrentQuestion.Options.Length - 1;
+
+            if (selection < 0)
+                selection = maxLen;
+
+            else if (selection > maxLen)
+                selection = 0;
+        }
+
+        public void WaitEnter()
+        {
+            bool done = false;
+
+            do
+            {
+                // reset the keyinfo
+                ConsoleKeyInfo? keyInfo = null;
+
+                if (Console.KeyAvailable)
+                    keyInfo = Console.ReadKey(true);
+
+                switch (keyInfo?.Key)
+                {
+                    case ConsoleKey.Enter:
+                        done = true;
+                        break;
+                }
+
+                Renderer.Instance.CheckForResizeAndReRender();
+                Thread.Sleep(16 * 2);
+            } while (!done);
+        }
+
+        public int GetSelection()
+        {
+            int selection = 0;
+            bool done = false;
+
+            do
+            {
+                // reset the keyinfo
+                ConsoleKeyInfo? keyInfo = null;
+
+                if (Console.KeyAvailable)
+                    keyInfo = Console.ReadKey(true);
+
+                switch (keyInfo?.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        ModifyMenuSelection(ref selection, -1);
+                        Renderer.Instance.SetSelectionIdAndRender(selection);
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        ModifyMenuSelection(ref selection, 1);
+                        Renderer.Instance.SetSelectionIdAndRender(selection);
+                        break;
+
+                    case ConsoleKey.Enter:
+                        done = true;
+                        break;
+                }
+
+                Renderer.Instance.CheckForResizeAndReRender();
+                Thread.Sleep(16 * 2);
+            } while (!done);
+
+            return selection;
+        }
+
+        private void ModifyMenuSelection(ref int selection, int amount)
+        {
+            selection += amount;
+            int maxLen = 1;
 
             if (selection < 0)
                 selection = maxLen;
