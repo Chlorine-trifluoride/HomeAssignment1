@@ -1,34 +1,28 @@
-## Homework 1: Age Verification
+<h1 align="center">
+	HomeAssignment1
+</h1>
 
-**Deadline: 12.8.2020 9am**
+### Info
 
-### H1.1. 
+This is a .NET C# console application, which asks the user's year of birth.
 
-Create a new .NET C# console application, which asks the users year of birth and calculates the age (get current year with DateTime.Now.Year). If the user is less than 18 years old, the program outputs
+<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/image.png"/>
+<br/>
+	
+And validates the input. If the validation fails:
 
-    Your age is *insert age here*.
-    You are not old enough to use this application.
+<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/old.png"/>
+<br/>
 
-If the users age is 18 or older, the program outputs
+If the input is accepted the user can proceed to the next part.
 
-    Your age is *insert age here*.
-    Welcome to the application!
+<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/welcome.png"/>
+<br/>
 
-### H1.2.
+### Questions
 
-Modify the application so that if the user is old enough, the application outputs a verification question with three options:
+The applications loads questions at random from a JSON database and presents them to the user.
+Use the Up and Down arrow keys to select your answer and press Enter to confirm.
 
-    What was done to the VHS cassette after finishing a movie?
-    1. The cassette was blown into.
-    2. The cassette was flipped to reveal the rest of the content.
-    3. The cassette was rewinded to begin at the start.
-
-If the user answers the question correctly, the program outputs
-
-    Welcome to the application!
-
-Otherwise, the program outputs
-
-	Nice try, kiddo..
-
-You can come up with your own verification questions and answers!
+<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/megabytes.png"/>
+<br/>
