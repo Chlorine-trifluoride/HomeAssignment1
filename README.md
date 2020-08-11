@@ -1,5 +1,5 @@
 <h1 align="center">
-	<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/testicon.png" width="128"/>
+	<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/testicon.png" width="256"/>
 	<br/>
 	HomeAssignment1
 </h1>
