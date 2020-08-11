@@ -21,15 +21,17 @@ namespace HomeworkApp
 
         public RENDERMODE Rendermode { get; set; }
         public string MessageToRender { get; set; }
-        private Action[] functionPointers;
+        private Action[] renderingFuncPtrs;
         private int width, height;
         private int selectionId = 0;
+
+        private int halfWidth => Console.WindowWidth / 2;
 
         private Renderer()
         {
             UpdateWindowDimensions();
 
-            functionPointers = new Action[]
+            renderingFuncPtrs = new Action[]
             {
                 RenderUnknown,
                 RenderAge,
@@ -47,7 +49,9 @@ namespace HomeworkApp
 
         public void Render()
         {
-            functionPointers[(int)Rendermode].Invoke();
+            Console.Clear();
+            SetColorNormal();
+            renderingFuncPtrs[(int)Rendermode].Invoke();
         }
 
         // returns true if window has changed
@@ -66,10 +70,8 @@ namespace HomeworkApp
 
         private void WriteCentered(string text, int top)
         {
-            int w = Console.WindowWidth;
-            int hw = w / 2;
             int halfText = text.Length / 2;
-            int centered = hw - halfText;
+            int centered = halfWidth - halfText;
 
             // TODO: proper error handling
             WriteMessageAtSafe(centered, top, text);
@@ -105,7 +107,7 @@ namespace HomeworkApp
                 if (Console.BufferWidth > errorText.Length)
                 {
                     Console.SetCursorPosition(0, 0);
-                    Console.Write("Window too small");
+                    Console.Write(errorText);
                 }
             }
 
@@ -127,34 +129,23 @@ namespace HomeworkApp
 
         private void RenderUnknown()
         {
-
+            throw new NotImplementedException();
         }
 
         private void RenderAge()
         {
-            int w = Console.WindowWidth;
-            int h = Console.WindowHeight;
-            int halfW = w / 2;
-            int halfH = h / 2;
-
-            Console.Clear();
-
             WriteCentered("Enter your birth year", 2);
 
             WriteCentered("=====================", 3);
 
             WriteCentered("=====================", 5);
 
-            SetCursorAtSafe(halfW - 2, 4);
+            SetCursorAtSafe(halfWidth - 2, 4);
         }
 
         private void RenderQuestion()
         {
             Question question = QuestionLoader.Instance.CurrentQuestion;
-            int w = Console.WindowWidth;
-            int h = Console.WindowHeight;
-
-            Console.Clear();
 
             WriteCentered("=====================", 2);
             WriteCentered(question.Title, 3);
@@ -178,25 +169,18 @@ namespace HomeworkApp
 
         private void RenderMessage()
         {
-            int w = Console.WindowWidth;
-            int h = Console.WindowHeight;
-            int halfW = w / 2;
-            int halfH = h / 2;
-
-            Console.Clear();
-
             WriteCentered("Message:", 2);
 
             WriteCentered("=====================", 3);
 
             WriteCentered("=====================", 5);
 
-            WriteMessageAtSafe(halfW - MessageToRender.Length / 2, 4, MessageToRender);
+            WriteCentered(MessageToRender, 4);
         }
 
         private void RenderOther()
         {
-
+            throw new NotImplementedException();
         }
     }
 }
