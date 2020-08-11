@@ -128,14 +128,14 @@ namespace HomeworkApp
             renderer.Rendermode = RENDERMODE.MAINMENU;
             renderer.SetSelectionIdAndRender(0);
 
-            int selection = inputMgr.GetSelection();
+            MAIN_MENUOPTION selection = (MAIN_MENUOPTION)inputMgr.GetSelection();
 
             switch (selection)
             {
-                case 0:
+                case MAIN_MENUOPTION.QUESTIONS:
                     PresentRandomQuestion();
                     break;
-                case 1:
+                case MAIN_MENUOPTION.SLOTS:
                     SlotsGame();
                     break;
 
