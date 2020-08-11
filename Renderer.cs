@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -12,6 +13,8 @@ namespace HomeworkApp
         AGE_VERIFICATION,
         QUESTION,
         MESSAGE,
+        SLOTS,
+        MAINMENU,
         OTHER
     }
 
@@ -21,6 +24,11 @@ namespace HomeworkApp
 
         public RENDERMODE Rendermode { get; set; }
         public string MessageToRender { get; set; }
+        public string SlotsToRender { get; set; }
+        public string WinningsToRender { get; set; }
+        public string PointsToRender { get; set; }
+        public MenuOptions MenuScreenOptions { get; set; }
+
         private Action[] renderingFuncPtrs;
         private int width, height;
         private int selectionId = 0;
@@ -37,6 +45,8 @@ namespace HomeworkApp
                 RenderAge,
                 RenderQuestion,
                 RenderMessage,
+                RenderSlots,
+                RenderMenu,
                 RenderOther
             };
         }
@@ -176,6 +186,40 @@ namespace HomeworkApp
             WriteCentered("=====================", 5);
 
             WriteCentered(MessageToRender, 4);
+        }
+
+        private void RenderSlots()
+        {
+            WriteCentered("Your Symbols:", 2);
+
+            WriteCentered("=====================", 3);
+            WriteCentered(SlotsToRender, 4);
+            WriteCentered("=====================", 5);
+            WriteCentered(PointsToRender, 6);
+            WriteCentered("============", 7);
+            WriteCentered(WinningsToRender, 8);
+        }
+
+        private void RenderMenu()
+        {
+            WriteCentered("=====================", 2);
+            WriteCentered(MenuScreenOptions.Title, 3);
+            WriteCentered("=====================", 4);
+
+            for (int i = 0; i < MenuScreenOptions.OptionsTexts.Length; i++)
+            {
+                if (selectionId == i)
+                    SetColorHighlight();
+                else
+                    SetColorNormal();
+
+                WriteCentered(MenuScreenOptions.OptionsTexts[i], 6 + i);
+            }
+
+            SetColorNormal();
+
+            // Render Help
+            WriteMessageAtSafe(1, Console.WindowHeight - 2, "Use arrow keys and enter to select your answer.");
         }
 
         private void RenderOther()

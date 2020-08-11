@@ -26,7 +26,7 @@ namespace HomeworkApp
 
             for (; ; )
             {
-                PresentRandomQuestion();
+                MainMenu();
             }
         }
 
@@ -34,5 +34,7 @@ namespace HomeworkApp
         protected abstract void PrintAgeReply(Age age);
         protected abstract void DisplayMessageToUser(string message, int milliseconds);
         protected abstract void PresentRandomQuestion();
+        protected abstract void SlotsGame();
+        protected abstract void MainMenu();
     }
 }
