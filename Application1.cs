@@ -117,31 +117,24 @@ namespace HomeworkApp
 
         protected override void MainMenu()
         {
-            MenuOptions menuOptions = new MenuOptions
-            {
-                Title = "Select an action.",
-                OptionsTexts = new string[2] { "Questions", "Slots Game" },
-                Selection = 0
-            };
+            // Using a menu builder simplifies our logic
+            MenuBuilder menuBuilder = new MenuBuilder();
+            menuBuilder.AddTitle("Select an action.");
+            menuBuilder.SetSelection(0);
+            menuBuilder.AddItem("Questions", PresentRandomQuestion);
+            menuBuilder.AddItem("Slots Game", SlotsGame);
+            menuBuilder.AddItem("Exit", ExitProgram);
+
+            // Returns the actual menu object
+            MenuOptions menuOptions = menuBuilder.Build();
 
             renderer.MenuScreenOptions = menuOptions;
             renderer.Rendermode = RENDERMODE.MAINMENU;
-            renderer.SetSelectionIdAndRender(0);
 
-            MAIN_MENUOPTION selection = (MAIN_MENUOPTION)inputMgr.GetSelection();
-
-            switch (selection)
-            {
-                case MAIN_MENUOPTION.QUESTIONS:
-                    PresentRandomQuestion();
-                    break;
-                case MAIN_MENUOPTION.SLOTS:
-                    SlotsGame();
-                    break;
-
-                default:
-                    throw new Exception();
-            }
+            // inputMgr will call render
+            int selection = inputMgr.GetSelection(menuOptions);
+            // Invoke the callback action from the MenuItem which we have selected
+            menuOptions.MenuItems[selection].Callback.Invoke();
         }
     }
 }

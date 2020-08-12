@@ -156,10 +156,13 @@ namespace HomeworkApp
             } while (!done);
         }
 
-        public int GetSelection()
+        public int GetSelection(MenuOptions menuOptions)
         {
-            int selection = 0;
+            int selection = menuOptions.Selection;
+            int lastOptionIndex = menuOptions.MenuItems.Length - 1;
             bool done = false;
+
+            Renderer.Instance.SetSelectionIdAndRender(selection);
 
             do
             {
@@ -172,12 +175,12 @@ namespace HomeworkApp
                 switch (keyInfo?.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        ModifyMenuSelection(ref selection, -1);
+                        ModifyMenuSelection(ref selection, -1, lastOptionIndex);
                         Renderer.Instance.SetSelectionIdAndRender(selection);
                         break;
 
                     case ConsoleKey.DownArrow:
-                        ModifyMenuSelection(ref selection, 1);
+                        ModifyMenuSelection(ref selection, 1, lastOptionIndex);
                         Renderer.Instance.SetSelectionIdAndRender(selection);
                         break;
 
@@ -193,15 +196,15 @@ namespace HomeworkApp
             return selection;
         }
 
-        private void ModifyMenuSelection(ref int selection, int amount)
+        // Used for looping back around
+        private void ModifyMenuSelection(ref int selection, int amount, int lastOptionIndex)
         {
             selection += amount;
-            int maxLen = 1;
 
             if (selection < 0)
-                selection = maxLen;
+                selection = lastOptionIndex;
 
-            else if (selection > maxLen)
+            else if (selection > lastOptionIndex)
                 selection = 0;
         }
     }

@@ -9,6 +9,8 @@ namespace HomeworkApp
         protected Renderer renderer;
         protected InputManager inputMgr;
 
+        private bool quit = false;
+
         public ApplicationBase()
         {
             renderer = Renderer.Instance;
@@ -24,11 +26,14 @@ namespace HomeworkApp
                 PrintAgeReply(age);
             } while (!age.IsValid);
 
-            for (; ; )
+            do
             {
                 MainMenu();
-            }
+            } while (!quit);
         }
+
+        protected void ExitProgram()
+            => quit = true;
 
         protected abstract Age AgeVerification();
         protected abstract void PrintAgeReply(Age age);

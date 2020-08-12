@@ -206,14 +206,14 @@ namespace HomeworkApp
             WriteCentered(MenuScreenOptions.Title, 3);
             WriteCentered("=====================", 4);
 
-            for (int i = 0; i < MenuScreenOptions.OptionsTexts.Length; i++)
+            for (int i = 0; i < MenuScreenOptions.MenuItems.Length; i++)
             {
                 if (selectionId == i)
                     SetColorHighlight();
                 else
                     SetColorNormal();
 
-                WriteCentered(MenuScreenOptions.OptionsTexts[i], 6 + i);
+                WriteCentered(MenuScreenOptions.MenuItems[i].Text, 6 + i);
             }
 
             SetColorNormal();
