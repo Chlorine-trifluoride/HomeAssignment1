@@ -95,6 +95,12 @@ namespace HomeworkApp
         {
             SlotsGame slotsGame = new SlotsGame();
 
+            slotsGame.Bet = GetBetFromBetSelectionMenu();
+
+            // Return option returns -1
+            if (slotsGame.Bet == -1)
+                return;
+
             DisplayMessageToUser("Your cards have been shuffled", 1500);
             DisplayMessageToUser("Press Enter to draw your slots", 500);
 
@@ -113,6 +119,33 @@ namespace HomeworkApp
             } while (slotsGame.SymbolsRemaining > 0);
 
             DisplayMessageToUser("Game Over: Out of cards", 1000);
+        }
+
+        protected override int GetBetFromBetSelectionMenu()
+        {
+            MenuBuilder menuBuilder = new MenuBuilder();
+            menuBuilder.AddTitle("Select your bet");
+
+            // This is a messy 'temporary' solution
+            int betValue = 0;
+
+            menuBuilder.AddItem("Bet 1", ()=>betValue=1);
+            menuBuilder.AddItem("Bet 5", ()=>betValue=5);
+            menuBuilder.AddItem("Bet 10", ()=>betValue=10);
+            menuBuilder.AddItem("Return", ()=>betValue=-1);
+            menuBuilder.SetSelection(0);
+
+            MenuOptions menuOptions = menuBuilder.Build();
+
+            renderer.MenuScreenOptions = menuOptions;
+            renderer.Rendermode = RENDERMODE.MAINMENU;
+
+            // inputMgr will call render
+            int selection = inputMgr.GetSelection(menuOptions);
+            // Invoke the callback action from the MenuItem which we have selected
+            menuOptions.MenuItems[selection].Callback.Invoke();
+
+            return betValue;
         }
 
         protected override void MainMenu()

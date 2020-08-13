@@ -8,9 +8,9 @@ namespace HomeworkApp
     class SlotsGame
     {
         public int Points { get; set; }
+        public int Bet { get; set; }
 
         private const int NUM_LISTS = 3;
-        private const int MULTIPLIER = 1;
         private RandomSymbolList[] randomSymbolLists;
 
         public SlotsGame()
@@ -75,7 +75,7 @@ namespace HomeworkApp
 
         private int AddPointsWithMultiplier(int amount)
         {
-            int totalWin = amount * MULTIPLIER;
+            int totalWin = amount * Bet;
             Points += totalWin;
 
             return totalWin;

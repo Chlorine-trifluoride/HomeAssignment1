@@ -40,6 +40,7 @@ namespace HomeworkApp
         protected abstract void DisplayMessageToUser(string message, int milliseconds);
         protected abstract void PresentRandomQuestion();
         protected abstract void SlotsGame();
+        protected abstract int GetBetFromBetSelectionMenu();
         protected abstract void MainMenu();
     }
 }
