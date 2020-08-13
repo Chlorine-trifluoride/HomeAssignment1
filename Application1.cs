@@ -91,7 +91,7 @@ namespace HomeworkApp
          * the balance is decreased by one, and a symbol from each list is randomly selected.
          * If all the symbols match, the player wins the amount specified in the table below:
          */
-        protected override void SlotsGame()
+        protected override void SlotsGame(bool infiniteCards)
         {
             SlotsGame slotsGame = new SlotsGame();
 
@@ -108,7 +108,7 @@ namespace HomeworkApp
             {
                 inputMgr.WaitEnter();
 
-                (char[] slots, int winnings) drawResult = slotsGame.Draw();
+                (char[] slots, int winnings) drawResult = slotsGame.Draw(!infiniteCards);
 
                 renderer.SlotsToRender = String.Join(',', drawResult.slots);
                 renderer.PointsToRender = $"Points: {slotsGame.Points}";
@@ -116,9 +116,14 @@ namespace HomeworkApp
 
                 renderer.Rendermode = RENDERMODE.SLOTS;
                 renderer.Render();
-            } while (slotsGame.SymbolsRemaining > 0);
+            } while (slotsGame.SymbolsRemaining > 0 && slotsGame.Points > 0);
 
-            DisplayMessageToUser("Game Over: Out of cards", 1000);
+            if (slotsGame.SymbolsRemaining <= 0)
+                DisplayMessageToUser("Game Over: Out of cards", 1000);
+            else if (slotsGame.Points <= 0)
+                DisplayMessageToUser("Game Over: Out of points", 1000);
+            else
+                throw new NotImplementedException();
         }
 
         protected override int GetBetFromBetSelectionMenu()
@@ -155,7 +160,8 @@ namespace HomeworkApp
             menuBuilder.AddTitle("Select an action.");
             menuBuilder.SetSelection(0);
             menuBuilder.AddItem("Questions", PresentRandomQuestion);
-            menuBuilder.AddItem("Slots Game", SlotsGame);
+            menuBuilder.AddItem("Slots Game", () => SlotsGame(false));
+            menuBuilder.AddItem("Infinite Cards", () => SlotsGame(true));
             menuBuilder.AddItem("Exit", ExitProgram);
 
             // Returns the actual menu object

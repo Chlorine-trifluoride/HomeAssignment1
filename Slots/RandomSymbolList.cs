@@ -29,12 +29,13 @@ namespace HomeworkApp
             => new RandomSymbolList();
 
         // Removes the symbol from the list
-        public char PickOutRandomSymbol()
+        public char PickOutRandomSymbol(bool removeCard)
         {
             int i = random.Next(0, symbols.Count);
             char symbol = symbols[i];
 
-            symbols.RemoveAt(i);
+            if (removeCard)
+                symbols.RemoveAt(i);
 
             return symbol;
         }
