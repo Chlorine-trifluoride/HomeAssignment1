@@ -29,7 +29,8 @@ namespace HomeworkApp
         public string PointsToRender { get; set; }
         public MenuOptions MenuScreenOptions { get; set; }
 
-        private Action[] renderingFuncPtrs;
+        private Dictionary<RENDERMODE, Action> renderingFuncPtrs;
+
         private int width, height;
         private int selectionId = 0;
 
@@ -39,15 +40,15 @@ namespace HomeworkApp
         {
             UpdateWindowDimensions();
 
-            renderingFuncPtrs = new Action[]
-            {
-                RenderUnknown,
-                RenderAge,
-                RenderQuestion,
-                RenderMessage,
-                RenderSlots,
-                RenderMenu,
-                RenderOther
+            renderingFuncPtrs = new Dictionary<RENDERMODE, Action>
+            { 
+                {RENDERMODE.UNKNOWN, RenderUnknown},
+                {RENDERMODE.AGE_VERIFICATION, RenderAge },
+                {RENDERMODE.QUESTION, RenderQuestion },
+                {RENDERMODE.MESSAGE, RenderMessage },
+                {RENDERMODE.SLOTS, RenderSlots },
+                {RENDERMODE.MAINMENU, RenderMenu },
+                {RENDERMODE.OTHER, RenderOther }
             };
         }
 
@@ -61,7 +62,7 @@ namespace HomeworkApp
         {
             Console.Clear();
             SetColorNormal();
-            renderingFuncPtrs[(int)Rendermode].Invoke();
+            renderingFuncPtrs[Rendermode].Invoke();
         }
 
         // returns true if window has changed
