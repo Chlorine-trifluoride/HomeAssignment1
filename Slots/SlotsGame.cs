@@ -8,9 +8,9 @@ namespace HomeworkApp
     class SlotsGame
     {
         public int Points { get; set; }
+        public int Bet { get; set; }
 
         private const int NUM_LISTS = 3;
-        private const int MULTIPLIER = 1;
         private RandomSymbolList[] randomSymbolLists;
 
         public SlotsGame()
@@ -22,7 +22,7 @@ namespace HomeworkApp
                 Enumerable.Repeat(0, NUM_LISTS).Select(x => RandomSymbolList.GetNewList()).ToArray();
         }
 
-        public (char[] slots, int winnings) Draw()
+        public (char[] slots, int winnings) Draw(bool removeCards)
         {
             // Deduct points for draw
             AddPointsWithMultiplier(-1);
@@ -31,7 +31,7 @@ namespace HomeworkApp
 
             for (int i = 0; i < NUM_LISTS; i++)
             {
-                values[i] = randomSymbolLists[i].PickOutRandomSymbol();
+                values[i] = randomSymbolLists[i].PickOutRandomSymbol(removeCards);
             }
 
             int winnings = CalculateWinnings(values);
@@ -75,7 +75,7 @@ namespace HomeworkApp
 
         private int AddPointsWithMultiplier(int amount)
         {
-            int totalWin = amount * MULTIPLIER;
+            int totalWin = amount * Bet;
             Points += totalWin;
 
             return totalWin;

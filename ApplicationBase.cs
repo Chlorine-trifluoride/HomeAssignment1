@@ -39,7 +39,8 @@ namespace HomeworkApp
         protected abstract void PrintAgeReply(Age age);
         protected abstract void DisplayMessageToUser(string message, int milliseconds);
         protected abstract void PresentRandomQuestion();
-        protected abstract void SlotsGame();
+        protected abstract void SlotsGame(bool infiniteCards);
+        protected abstract int GetBetFromBetSelectionMenu();
         protected abstract void MainMenu();
     }
 }
