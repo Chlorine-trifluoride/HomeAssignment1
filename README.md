@@ -40,6 +40,10 @@ Use the Up and Down arrow keys to select your answer and press Enter to confirm.
 
 ### Slots Game
 
+Select your bet level using arrow keys and enter.
+
+<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/bets.png"/>
+
 <img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/slots.png"/>
 
 Press Enter to draw new slots.
