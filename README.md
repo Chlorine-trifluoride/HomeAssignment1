@@ -2,6 +2,8 @@
 	<img src="https://github.com/Chlorine-trifluoride/media/raw/master/random/testicon.png" width="256"/>
 	<br/>
 	HomeAssignment1
+	<br/>
+	<img src="https://github.com/Chlorine-trifluoride/HomeAssignment1/workflows/.NET%20Core/badge.svg"/>
 </h1>
 
 ## Info
