@@ -11,7 +11,7 @@ namespace HomeworkApp
         public string SetValid()
         {
             IsValid = true;
-            return "Welcome to the secret club";
+            return "Welcome to the application.";
         }
     }
 }
