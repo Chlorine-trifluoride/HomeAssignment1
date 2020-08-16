@@ -156,7 +156,7 @@ namespace HomeworkApp
             } while (!done);
         }
 
-        public int GetSelection(MenuOptions menuOptions)
+        public MenuItem GetSelection(MenuOptions menuOptions)
         {
             int selection = menuOptions.Selection;
             int lastOptionIndex = menuOptions.MenuItems.Length - 1;
@@ -193,7 +193,7 @@ namespace HomeworkApp
                 Thread.Sleep(16 * 2);
             } while (!done);
 
-            return selection;
+            return menuOptions.MenuItems[selection];
         }
 
         // Used for looping back around

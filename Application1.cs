@@ -146,9 +146,9 @@ namespace HomeworkApp
             renderer.Rendermode = RENDERMODE.MAINMENU;
 
             // inputMgr will call render
-            int selection = inputMgr.GetSelection(menuOptions);
+            MenuItem selectedMenuItem = inputMgr.GetSelection(menuOptions);
             // Invoke the callback action from the MenuItem which we have selected
-            menuOptions.MenuItems[selection].Callback.Invoke();
+            selectedMenuItem.Callback.Invoke();
 
             return betValue;
         }
@@ -171,9 +171,9 @@ namespace HomeworkApp
             renderer.Rendermode = RENDERMODE.MAINMENU;
 
             // inputMgr will call render
-            int selection = inputMgr.GetSelection(menuOptions);
+            MenuItem selectedMenuItem = inputMgr.GetSelection(menuOptions);
             // Invoke the callback action from the MenuItem which we have selected
-            menuOptions.MenuItems[selection].Callback.Invoke();
+            selectedMenuItem.Callback.Invoke();
         }
     }
 }
